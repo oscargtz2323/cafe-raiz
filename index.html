@@ -1,2 +1,174 @@
-# cafe-raiz
-Paguina web de una cafeteria 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Café Raíz</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: #1a1208; color: #f0e6d0; }
+
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem; background: #1a1208;
+    border-bottom: 1px solid #3a2a10; position: sticky; top: 0; z-index: 100;
+  }
+  .logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #d4a853; letter-spacing: 2px; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: #c9b89a; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.3s; }
+  .nav-links a:hover { color: #d4a853; }
+
+  .hero {
+    min-height: 92vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+    padding: 4rem 2rem;
+    background: radial-gradient(ellipse at center, #2e1f08 0%, #1a1208 70%);
+    border-bottom: 1px solid #3a2a10;
+  }
+  .hero-tag { font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase; color: #d4a853; margin-bottom: 1.5rem; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6rem); line-height: 1.1; color: #f0e6d0; margin-bottom: 1.5rem; }
+  .hero h1 span { color: #d4a853; font-style: italic; }
+  .hero p { font-size: 1.1rem; color: #9a8870; max-width: 480px; line-height: 1.8; margin-bottom: 2.5rem; font-weight: 300; }
+  .btn { background: #d4a853; color: #1a1208; padding: 0.9rem 2.5rem; text-decoration: none; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; transition: background 0.3s; display: inline-block; }
+  .btn:hover { background: #e8bf70; }
+  .btn-outline { background: transparent; color: #d4a853; border: 1px solid #d4a853; margin-left: 1rem; }
+  .btn-outline:hover { background: #d4a85320; }
+
+  .section { padding: 5rem 3rem; max-width: 1100px; margin: 0 auto; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #f0e6d0; margin-bottom: 0.5rem; }
+  .section-sub { color: #9a8870; font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 3rem; }
+  .divider { width: 40px; height: 2px; background: #d4a853; margin: 1rem 0 2rem; }
+
+  .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+  .menu-card {
+    background: #231708; border: 1px solid #3a2a10; padding: 2rem;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .menu-card:hover { border-color: #d4a853; transform: translateY(-4px); }
+  .menu-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .menu-card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #f0e6d0; margin-bottom: 0.5rem; }
+  .menu-card p { color: #9a8870; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem; font-weight: 300; }
+  .price { color: #d4a853; font-size: 1.1rem; font-weight: 500; }
+
+  .about-section { background: #231708; border-top: 1px solid #3a2a10; border-bottom: 1px solid #3a2a10; padding: 5rem 3rem; }
+  .about-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .about-img { width: 100%; height: 340px; background: #3a2a10; display: flex; align-items: center; justify-content: center; font-size: 5rem; }
+  .about-text h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #f0e6d0; margin-bottom: 1rem; }
+  .about-text p { color: #9a8870; line-height: 1.9; font-weight: 300; margin-bottom: 1.5rem; }
+
+  .horario { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
+  .horario-row { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid #3a2a10; font-size: 0.9rem; }
+  .horario-row span:first-child { color: #9a8870; }
+  .horario-row span:last-child { color: #d4a853; }
+
+  footer { text-align: center; padding: 2rem; color: #5a4a30; font-size: 0.8rem; letter-spacing: 1px; border-top: 1px solid #3a2a10; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">☕ Café Raíz</div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menú</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#horario">Horario</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <p class="hero-tag">Querétaro, México</p>
+  <h1>Café con <span>alma</span><br>y carácter</h1>
+  <p>Granos de origen seleccionados, tostados con cuidado y preparados con pasión. Cada taza cuenta una historia.</p>
+  <div>
+    <a href="#menu" class="btn">Ver menú</a>
+    <a href="#nosotros" class="btn btn-outline">Nuestra historia</a>
+  </div>
+</section>
+
+<section class="section" id="menu">
+  <p class="section-sub">Lo que ofrecemos</p>
+  <h2 class="section-title">Nuestro menú</h2>
+  <div class="divider"></div>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <div class="menu-icon">☕</div>
+      <h3>Espresso clásico</h3>
+      <p>Concentrado y aromático. La base de todo gran café, con cuerpo intenso y acabado suave.</p>
+      <span class="price">$45</span>
+    </div>
+    <div class="menu-card">
+      <div class="menu-icon">🥛</div>
+      <h3>Latte de vainilla</h3>
+      <p>Espresso doble con leche vaporizada y un toque de vainilla natural. Cremoso y equilibrado.</p>
+      <span class="price">$75</span>
+    </div>
+    <div class="menu-card">
+      <div class="menu-icon">🍫</div>
+      <h3>Mocha oscuro</h3>
+      <p>Espresso con chocolate amargo 70%, leche y crema batida. Intenso y reconfortante.</p>
+      <span class="price">$85</span>
+    </div>
+    <div class="menu-card">
+      <div class="menu-icon">🌿</div>
+      <h3>Matcha latte</h3>
+      <p>Té matcha ceremonial con leche de avena. Para quienes buscan algo distinto y saludable.</p>
+      <span class="price">$80</span>
+    </div>
+    <div class="menu-card">
+      <div class="menu-icon">🥐</div>
+      <h3>Croissant de mantequilla</h3>
+      <p>Hecho en casa cada mañana. Crujiente por fuera, suave y hojaldrado por dentro.</p>
+      <span class="price">$55</span>
+    </div>
+    <div class="menu-card">
+      <div class="menu-icon">🍰</div>
+      <h3>Pay de queso</h3>
+      <p>Receta de la casa con base de galleta, cremoso y con coulis de frutos rojos.</p>
+      <span class="price">$70</span>
+    </div>
+  </div>
+</section>
+
+<div class="about-section" id="nosotros">
+  <div class="about-inner">
+    <div class="about-img">🌱</div>
+    <div class="about-text">
+      <p class="section-sub">Nuestra historia</p>
+      <h2>Nacimos en Querétaro con amor al café</h2>
+      <div class="divider"></div>
+      <p>Café Raíz nació en 2018 con una idea sencilla: servir café de especialidad en un espacio donde la gente se sienta en casa. Trabajamos directamente con productores de Oaxaca y Chiapas para traerte los mejores granos.</p>
+      <p>Creemos que un buen café no necesita adornos. Solo calidad, cuidado y honestidad en cada paso del proceso.</p>
+    </div>
+  </div>
+</div>
+
+<section class="section" id="horario">
+  <p class="section-sub">Visítanos</p>
+  <h2 class="section-title">Horario y contacto</h2>
+  <div class="divider"></div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+    <div>
+      <div class="horario" id="contacto">
+        <div class="horario-row"><span>Lunes – Viernes</span><span>7:00 am – 9:00 pm</span></div>
+        <div class="horario-row"><span>Sábado</span><span>8:00 am – 10:00 pm</span></div>
+        <div class="horario-row"><span>Domingo</span><span>9:00 am – 7:00 pm</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="horario">
+        <div class="horario-row"><span>Dirección</span><span>Av. Tecnológico 123, Qro.</span></div>
+        <div class="horario-row"><span>Teléfono</span><span>442 123 4567</span></div>
+        <div class="horario-row"><span>Instagram</span><span>@caferaiz_qro</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2024 Café Raíz · Querétaro, México · Hecho con HTML, CSS y mucho café ☕
+</footer>
+
+</body>
+</html>
